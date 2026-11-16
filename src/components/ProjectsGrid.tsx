@@ -52,15 +52,14 @@ const BUILDS: Project[] = [
 
 /* ---------- Previews ---------- */
 
-const HUES = ['#2563EB', '#FF7A1A', '#7C3AED', '#0EA5E9', '#EC4899', '#16A34A', '#F59E0B', '#0891B2', '#EF4444', '#8B5CF6']
-
-function tiles(n: number, Glyph: ComponentType<{ size?: number; weight?: 'duotone' }>, cls = '', offset = 0) {
+/** Real thumbnails of the work, from public/work/<dir>/1.jpg ... n.jpg. */
+function shots(dir: string, n: number, cls = '') {
   return function Preview() {
     return (
       <div className={`bento__media kdrive ${cls}`} aria-hidden="true">
         {Array.from({ length: n }, (_, i) => (
-          <span key={i} className="kdrive__tile" style={{ background: HUES[(i + offset) % HUES.length] }}>
-            <Glyph size={22} weight="duotone" />
+          <span key={i} className="kdrive__tile kdrive__tile--img">
+            <img src={`/work/${dir}/${i + 1}.jpg`} alt="" loading="lazy" decoding="async" />
           </span>
         ))}
       </div>
@@ -79,10 +78,10 @@ function ToolsPreview() {
 }
 
 const PROJECTS: Project[] = [
-  { id: 'smm', cat: 'work', index: '01', title: 'Social Media Management', desc: 'Posts, carousels and content calendars made and scheduled for US brands. ' + D, Icon: ShareNetwork, eyebrow: 'Social Media', Section: SMMPanel, span: 2, Preview: tiles(5, ShareNetwork, 'kdrive--wide') },
-  { id: 'plan', cat: 'work', index: '02', title: 'Thumbnails', desc: 'YouTube and video thumbnails built to earn the click.', Icon: ImageSquare, eyebrow: 'Thumbnails', Section: ThumbsPanel, Preview: tiles(3, ImageSquare, '', 3) },
-  { id: 'graphics', cat: 'work', index: '06', title: 'Graphics', desc: 'Ads, logos, brand assets and AI-assisted visuals.', Icon: PaintBrush, eyebrow: 'Graphics', Section: GraphicsPanel, Preview: tiles(3, PaintBrush, '', 6) },
-  { id: 'reels', cat: 'video', index: '07', title: 'Short Videos', desc: 'Reels, Shorts and TikToks edited in CapCut, Opus Clip and VEED.', Icon: FilmSlate, eyebrow: 'Short Reels', Section: ReelsPanel, Preview: tiles(3, FilmSlate, 'kdrive--reel', 1) },
+  { id: 'smm', cat: 'work', index: '01', title: 'Social Media Management', desc: 'Posts, carousels and content calendars made and scheduled for US brands. ' + D, Icon: ShareNetwork, eyebrow: 'Social Media', Section: SMMPanel, span: 2, Preview: shots('smm', 5, 'kdrive--wide') },
+  { id: 'plan', cat: 'work', index: '02', title: 'Thumbnails', desc: 'YouTube and video thumbnails built to earn the click.', Icon: ImageSquare, eyebrow: 'Thumbnails', Section: ThumbsPanel, Preview: shots('thumbs', 3) },
+  { id: 'graphics', cat: 'work', index: '06', title: 'Graphics', desc: 'Ads, logos, brand assets and AI-assisted visuals.', Icon: PaintBrush, eyebrow: 'Graphics', Section: GraphicsPanel, Preview: shots('graphics', 3) },
+  { id: 'reels', cat: 'video', index: '07', title: 'Short Videos', desc: 'Reels, Shorts and TikToks edited in CapCut, Opus Clip and VEED.', Icon: FilmSlate, eyebrow: 'Short Reels', Section: ReelsPanel, Preview: shots('reels', 3, 'kdrive--reel') },
   { id: 'tools', cat: 'tools', index: '08', title: 'Toolkit', desc: 'The platforms I work in every day, from GoHighLevel funnels to Canva and CapCut.', Icon: Toolbox, eyebrow: 'Toolkit', Section: ToolkitWindow, span: 2, Preview: ToolsPreview },
 ]
 

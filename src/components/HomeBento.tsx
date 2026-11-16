@@ -14,7 +14,6 @@ import {
   FilmSlate,
   Headset,
   GraduationCap,
-  ImageSquare,
 } from '@/components/slab'
 import { TOOLKIT } from './ProjectPanels'
 import { profile } from '@/data/profile'
@@ -30,10 +29,12 @@ import { profile } from '@/data/profile'
  */
 
 const PROJECT_SHOTS = [
-  { label: 'Social Media', Icon: ShareNetwork, bg: '#2563EB' },
-  { label: 'Thumbnails', Icon: ImageSquare, bg: '#FF7A1A' },
-  { label: 'Graphics', Icon: PaintBrush, bg: '#7C3AED' },
-  { label: 'Short Videos', Icon: FilmSlate, bg: '#EC4899' },
+  { label: 'Thumbnails', src: '/work/thumbs/2.jpg' },
+  { label: 'Graphics', src: '/work/graphics/1.jpg' },
+  { label: 'Social Media', src: '/work/smm/3.jpg' },
+  { label: 'Thumbnails', src: '/work/thumbs/3.jpg' },
+  { label: 'Graphics', src: '/work/graphics/2.jpg' },
+  { label: 'Thumbnails', src: '/work/thumbs/4.jpg' },
 ]
 
 const OFFERS = [
@@ -89,10 +90,10 @@ export default function HomeBento() {
         <CardHead Icon={FolderOpen} title="Projects" desc="Social posts, thumbnails, graphics and short videos." />
         <div className="bento__media bento__reel" aria-hidden="true">
           <div className="bento__reel-track">
-            {[...PROJECT_SHOTS, ...PROJECT_SHOTS].map(({ label, Icon, bg }, i) => (
-              <span key={i} className="bento__shot kshot" style={{ background: bg }}>
-                <Icon size={26} weight="duotone" />
-                <b>{label}</b>
+            {[...PROJECT_SHOTS, ...PROJECT_SHOTS].map(({ label, src }, i) => (
+              <span key={i} className="bento__shot bento__shot--work">
+                <img src={src} alt="" loading="lazy" decoding="async" />
+                <b className="bento__shot-tag">{label}</b>
               </span>
             ))}
           </div>
